@@ -1,475 +1,92 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>바이브코딩 교사 포트폴리오</title>
-<meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans+KR:wght@400;500;700&amp;display=swap">
-<style id="main-style">
-/* Layout: a chalkboard band (with its chalk tray) holds the teacher and the page QR; below it, a notebook-paper page lists works and training hours. */
-:root {
-  --paper: #f5f6f1;
-  --card: #ffffff;
-  --ink: #17231f;
-  --muted: #56665f;
-  --line: #d6dcd3;
-  --board: #22392f;
-  --board-ink: #f1efe4;
-  --board-muted: #b9c4bb;
-  --tray: #8a6a45;
-  --accent: #e2b43c;
-  --accent-ink: #7f600c;
-  --web: #2f6f8f;
-  --app: #8c4a6b;
-  --danger: #b23b2e;
-  --qr-bg: #ffffff;
-  --qr-fg: #111111;
-  --display: "Do Hyeon", "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-  --body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
-  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --paper: #111916; --card: #18221e; --ink: #e6ebe5; --muted: #98a79f; --line: #2b3a34;
-    --board: #1b2d26; --board-ink: #eeede3; --board-muted: #a8b5ad; --tray: #6b5234;
-    --accent: #e8c158; --accent-ink: #e8c158; --web: #7fb7d3; --app: #d79cba; --danger: #f08a7c;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --paper: #111916; --card: #18221e; --ink: #e6ebe5; --muted: #98a79f; --line: #2b3a34;
-  --board: #1b2d26; --board-ink: #eeede3; --board-muted: #a8b5ad; --tray: #6b5234;
-  --accent: #e8c158; --accent-ink: #e8c158; --web: #7fb7d3; --app: #d79cba; --danger: #f08a7c;
-  color-scheme: dark;
-}
-* { box-sizing: border-box; }
-body { background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.65; }
-body.editing { padding-bottom: 88px; }
-.wrap { max-width: 1080px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
-.mono { font-family: var(--mono); }
-h1, h2, h3 { text-wrap: balance; margin: 0; }
-p { margin: 0; }
-button { font: inherit; }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>바이브코딩 교사 포트폴리오</title>
+  <meta name="description" content="바이브코딩으로 만든 수업용 웹사이트와 앱, 연수 이력을 모은 교사 포트폴리오">
 
-.notice { background: var(--accent); color: #2a2205; font-size: 14px; }
-.notice .wrap { padding-block: 8px; }
+  <!-- 글꼴: Google Fonts. 다른 글꼴을 쓰려면 이 줄과 style.css 맨 위의 글꼴 설정을 함께 바꾸세요. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap">
 
-/* chalkboard */
-.board { background: var(--board); color: var(--board-ink); border-bottom: 12px solid var(--tray); position: relative; }
-.board::after { content: ""; position: absolute; left: 0; right: 0; bottom: -12px; height: 3px; background: rgba(0,0,0,.18); }
-.board-in { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 40px; align-items: start; padding-block: 44px 48px; }
-.topline { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
-.eyebrow { font-size: 13px; letter-spacing: .06em; color: var(--board-muted); }
-.board h1 { font-family: var(--display); font-weight: 400; font-size: clamp(44px, 7vw, 76px); line-height: 1.05; margin-top: 18px; letter-spacing: -.01em; }
-.role { font-size: 18px; color: var(--board-muted); margin-top: 8px; }
-.prompt { margin-top: 22px; font-size: 16px; color: var(--accent); }
-.prompt .gt { opacity: .7; margin-right: 4px; }
-.caret { display: inline-block; width: .55em; height: 1.1em; background: var(--accent); vertical-align: -2px; margin-left: 4px; animation: blink 1.1s steps(1) infinite; }
-@keyframes blink { 50% { opacity: 0; } }
-@media (prefers-reduced-motion: reduce) { .caret { animation: none; } }
-.intro { margin-top: 14px; max-width: 58ch; color: var(--board-ink); }
-.chalk-tags { list-style: none; padding: 0; margin: 20px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
-.chalk-tags li { border: 1.5px dashed rgba(241,239,228,.55); border-radius: 4px; padding: 2px 10px; font-size: 14px; color: var(--board-ink); }
-.who-actions { display: flex; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-.qr-card { background: var(--qr-bg); color: #17231f; border-radius: 8px; padding: 16px; width: 220px; display: grid; gap: 10px; justify-items: center; transform: rotate(1.2deg); box-shadow: 0 10px 24px rgba(0,0,0,.28); }
-.qr-label { font-size: 12px; letter-spacing: .08em; color: #56665f; }
-.qr-box { width: 188px; aspect-ratio: 1; max-width: 100%; display: grid; place-items: center; }
-.qr-box svg, .qr-box img { width: 100%; height: 100%; object-fit: contain; display: block; }
-.qr-empty { width: 100%; height: 100%; border: 2px dashed #b9c1b9; border-radius: 6px; display: grid; place-content: center; text-align: center; color: #56665f; font-size: 15px; line-height: 1.4; padding: 10px; }
-.qr-empty small { font-size: 12px; display: block; margin-top: 6px; }
-.qr-url { font-size: 11px; color: #56665f; word-break: break-all; text-align: center; }
-.qr-card .btn { border-color: #cfd6ce; color: #17231f; background: #fff; }
+  <!-- ===== 1. 칠판 영역: 이름, 소개, 이 페이지 QR ===== -->
+  <header class="board">
+    <div class="wrap board-in">
+      <div class="who">
+        <p class="eyebrow mono" id="eyebrow"></p>
+        <h1 id="name">불러오는 중…</h1>
+        <p class="role" id="role"></p>
+        <p class="prompt mono" id="motto-line"><span class="gt">&gt;</span><span id="motto"></span><span class="caret" aria-hidden="true"></span></p>
+        <p class="intro" id="intro"></p>
+        <ul class="chalk-tags" id="tags"></ul>
+      </div>
 
-/* buttons */
-.btn { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); background: var(--card); color: var(--ink); border-radius: 6px; padding: 7px 14px; cursor: pointer; text-decoration: none; font-size: 15px; line-height: 1.3; }
-.btn:hover { border-color: var(--ink); }
-.btn.small { padding: 4px 10px; font-size: 13px; }
-.btn.primary { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-.btn.danger { color: var(--danger); border-color: var(--danger); }
-.btn.chalk { background: transparent; color: var(--board-ink); border: 1.5px solid rgba(241,239,228,.6); }
-.btn.chalk:hover { border-color: var(--board-ink); }
-.btn.chalk.on { background: var(--accent); color: #2a2205; border-color: var(--accent); }
-.btn:disabled { opacity: .5; cursor: default; }
+      <aside class="qr-card" aria-label="이 페이지 QR 코드">
+        <div class="qr-label mono">이 페이지 바로가기</div>
+        <div class="qr-box" id="site-qr"></div>
+        <div class="qr-url mono" id="site-url"></div>
+        <button class="btn small" id="copy-site">주소 복사</button>
+      </aside>
+    </div>
+  </header>
 
-/* sections */
-main { display: grid; gap: 64px; padding-block: 56px 72px; }
-.sec-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 22px; padding-bottom: 12px; border-bottom: 2px solid var(--ink); }
-.sec-head h2 { font-family: var(--display); font-weight: 400; font-size: 34px; line-height: 1.1; }
-.count { color: var(--muted); font-size: 14px; }
-.sec-tools { margin-left: auto; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
-.chip-btn { border: 1px solid var(--line); background: transparent; color: var(--muted); border-radius: 999px; padding: 3px 12px; font-size: 14px; cursor: pointer; }
-.chip-btn.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  <main class="wrap">
 
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 18px; }
-.card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 20px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
-.card-top { display: flex; align-items: center; gap: 8px; }
-.kind { font-size: 12px; font-weight: 700; letter-spacing: .04em; padding: 1px 8px; border-radius: 4px; border: 1.5px solid currentColor; }
-.kind-web { color: var(--web); }
-.kind-app { color: var(--app); }
-.sample { font-size: 12px; color: var(--accent-ink); border: 1px dashed var(--accent-ink); border-radius: 4px; padding: 0 6px; }
-.yr { margin-left: auto; font-size: 13px; color: var(--muted); }
-.card h3 { font-size: 20px; line-height: 1.35; }
-.card p { color: var(--muted); font-size: 15px; }
-.card .tools { font-size: 12.5px; color: var(--muted); }
-.card-foot { margin-top: auto; padding-top: 8px; display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; }
-.qr-thumb { width: 76px; height: 76px; padding: 4px; background: var(--qr-bg); border: 1px solid var(--line); border-radius: 6px; cursor: zoom-in; flex: none; }
-.qr-thumb svg, .qr-thumb img { width: 100%; height: 100%; display: block; object-fit: contain; }
-.card-edit { display: flex; gap: 6px; border-top: 1px dashed var(--line); padding-top: 10px; }
-.muted { color: var(--muted); font-size: 14px; }
-.empty { color: var(--muted); padding: 24px 0; }
+    <!-- ===== 2. 만든 것들 (작품 목록은 data.json의 "작품"에서 불러옵니다) ===== -->
+    <section id="works">
+      <div class="sec-head">
+        <h2>만든 것들</h2>
+        <span class="count mono" id="works-count"></span>
+        <div class="filters" role="group" aria-label="작품 종류">
+          <button class="chip-btn on" data-filter="전체">전체</button>
+          <button class="chip-btn" data-filter="웹사이트">웹사이트</button>
+          <button class="chip-btn" data-filter="앱">앱</button>
+        </div>
+      </div>
+      <div class="grid" id="works-grid"></div>
+    </section>
 
-/* training table */
-.table-scroll { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; min-width: 560px; font-size: 15px; }
-th { text-align: left; font-weight: 500; color: var(--muted); font-size: 13px; letter-spacing: .04em; padding: 8px 10px; border-bottom: 1px solid var(--line); }
-td { padding: 12px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
-td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; font-family: var(--mono); }
-td.date { font-family: var(--mono); font-variant-numeric: tabular-nums; color: var(--muted); white-space: nowrap; }
-tfoot td { border-bottom: none; font-weight: 700; padding-top: 14px; }
-.tk { font-size: 12px; padding: 1px 8px; border-radius: 999px; border: 1px solid var(--line); white-space: nowrap; }
-.tk.teach { background: var(--accent); color: #2a2205; border-color: var(--accent); }
-.row-edit { display: flex; gap: 4px; justify-content: flex-end; }
+    <!-- ===== 3. 연수 이력 (data.json의 "연수") ===== -->
+    <section id="training">
+      <div class="sec-head">
+        <h2>연수 이력</h2>
+        <span class="count mono" id="training-count"></span>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>기간</th><th>연수명</th><th>기관</th><th>구분</th><th class="num">시수</th></tr>
+          </thead>
+          <tbody id="training-rows"></tbody>
+          <tfoot>
+            <tr><td colspan="4">합계</td><td class="num" id="training-total"></td></tr>
+          </tfoot>
+        </table>
+      </div>
+    </section>
 
-.contact { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; }
-.contact .addr { font-family: var(--mono); font-size: 16px; user-select: all; }
+    <!-- ===== 4. 연락하기 (이메일·블로그가 비어 있으면 숨겨집니다) ===== -->
+    <section id="contact" hidden>
+      <div class="sec-head"><h2>연락하기</h2></div>
+      <div class="contact" id="contact-body"></div>
+    </section>
 
-footer { color: var(--muted); font-size: 13px; padding-block: 24px 40px; border-top: 1px solid var(--line); }
+  </main>
 
-/* edit bar, toast, sheet */
-.editbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: var(--ink); color: var(--paper); padding-top: 12px; padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
-.editbar-in { max-width: 1080px; margin: 0 auto; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-.editbar .msg { flex: 1; min-width: 0; font-size: 14px; }
-.editbar .btn { background: transparent; color: var(--paper); border-color: rgba(255,255,255,.35); }
-.editbar .btn.primary { background: var(--accent); color: #2a2205; border-color: var(--accent); }
-.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(96px + env(safe-area-inset-bottom, 0px)); z-index: 30; background: var(--ink); color: var(--paper); padding: 10px 16px; border-radius: 6px; font-size: 14px; max-width: calc(100% - 32px); }
-dialog { border: 1px solid var(--line); border-radius: 10px; padding: 0; width: min(520px, calc(100% - 32px)); background: var(--card); color: var(--ink); }
-dialog::backdrop { background: rgba(10,20,16,.55); }
-.sheet-form { padding: 22px; display: grid; gap: 14px; }
-.sheet-form h3 { font-family: var(--display); font-weight: 400; font-size: 26px; }
-.field { display: grid; gap: 4px; }
-.field label { font-size: 14px; font-weight: 500; }
-.field .hint { font-size: 12.5px; color: var(--muted); }
-.field input, .field textarea, .field select { font: inherit; font-size: 15px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--paper); color: var(--ink); width: 100%; }
-.field textarea { min-height: 90px; resize: vertical; }
-.img-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-.img-prev { width: 72px; height: 72px; border: 1px solid var(--line); border-radius: 6px; background: var(--qr-bg); display: grid; place-items: center; overflow: hidden; }
-.img-prev img { width: 100%; height: 100%; object-fit: contain; }
-.form-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 4px; }
-.zoom { padding: 24px; display: grid; gap: 12px; justify-items: center; text-align: center; }
-.zoom .qr-big { width: min(300px, 100%); aspect-ratio: 1; background: var(--qr-bg); padding: 8px; border-radius: 6px; }
-.zoom .qr-big svg, .zoom .qr-big img { width: 100%; height: 100%; display: block; object-fit: contain; }
-.zoom .u { font-family: var(--mono); font-size: 12px; color: var(--muted); word-break: break-all; }
+  <footer><div class="wrap" id="footer"></div></footer>
 
-@media (max-width: 760px) {
-  .board-in { grid-template-columns: minmax(0,1fr); gap: 32px; padding-block: 32px 36px; }
-  .qr-card { justify-self: start; transform: none; }
-  .sec-tools { margin-left: 0; width: 100%; }
-  main { gap: 48px; padding-block: 40px 56px; }
-}
-</style>
-<div id="root"></div>
-<dialog id="sheet"></dialog>
-<script id="state" type="application/json">{"profile":{"sample":true,"name":"김하늘 선생님","role":"초등교사 · 바이브코딩 연구와 교원 연수","school":"○○초등학교","year":"2026학년도","motto":"수업에 필요한 도구는 직접 만듭니다","intro":"AI와 대화하며 코드를 짜는 바이브코딩으로 교실에서 바로 쓰는 웹사이트와 앱을 만들고 있어요. 직접 만들며 배운 과정을 동료 선생님들과 연수로 나눕니다.","tags":["바이브코딩","에듀테크","수업 도구 제작","교원 연수"],"email":"","blog":""},"site":{"url":"","qrImage":""},"projects":[{"id":"p1","sample":true,"kind":"web","title":"우리 반 자리 바꾸기","desc":"학생 이름을 넣으면 규칙에 맞춰 자리를 섞어 주는 웹페이지예요. 지난번 짝과 겹치지 않게 배치합니다.","url":"https://example.com/seats","tools":"HTML · JavaScript · Claude","year":"2026","qrImage":""},{"id":"p2","sample":true,"kind":"app","title":"학급 독서 기록장","desc":"학생이 읽은 책과 한 줄 감상을 남기면 반 전체 독서량을 그래프로 보여 줍니다.","url":"https://example.com/reading","tools":"React · Firebase","year":"2026","qrImage":""},{"id":"p3","sample":true,"kind":"web","title":"수행평가 루브릭 도우미","desc":"성취기준을 고르면 채점 기준표 초안을 만들어 주는 도구예요.","url":"https://example.com/rubric","tools":"HTML · Claude API","year":"2025","qrImage":""},{"id":"p4","sample":true,"kind":"app","title":"발표 순서 뽑기 타이머","desc":"발표 순서를 무작위로 뽑고, 1인당 발표 시간을 재 주는 교실용 앱입니다.","url":"https://example.com/timer","tools":"Flutter","year":"2025","qrImage":""}],"trainings":[{"id":"t1","sample":true,"date":"2026.08","title":"바이브코딩으로 수업 도구 만들기","org":"○○교육연수원","hours":"15","kind":"강의"},{"id":"t2","sample":true,"date":"2026.07","title":"생성형 AI 활용 수업 설계","org":"○○교육청","hours":"30","kind":"수강"},{"id":"t3","sample":true,"date":"2026.04","title":"웹 기초: HTML·CSS·JavaScript","org":"원격교육연수원","hours":"15","kind":"수강"},{"id":"t4","sample":true,"date":"2025.12","title":"에듀테크 선도교사 직무연수","org":"○○교육청","hours":"12","kind":"수강"}]}</script>
-<script id="qr-lib" src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
-<script id="app">
-(function () {
-  var $ = function (s) { return document.querySelector(s); };
-  var root = $('#root'), sheet = $('#sheet');
-  var state = JSON.parse($('#state').textContent);
-  var editing = false, dirty = 0, art = null, canEdit = false, filter = 'all', confirmDel = null, saving = false;
-  var RESET = ':root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,-apple-system,sans-serif}img{max-width:100%}[hidden]{display:none!important}';
+  <!-- QR 크게 보기 창 -->
+  <dialog id="zoom"></dialog>
+  <div class="toast" id="toast" role="status" hidden></div>
 
-  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
-  function safeUrl(u) { return /^https?:\/\/\S+$/i.test(u || '') ? u : ''; }
-  function safeImg(u) { return /^data:image\/(png|jpeg|webp|gif);base64,/i.test(u || '') ? u : ''; }
-  function uid() { return Math.random().toString(36).slice(2, 9); }
-
-  function qrSvg(text) {
-    if (!window.qrcode || !text) return '';
-    try {
-      if (qrcode.stringToBytesFuncs && qrcode.stringToBytesFuncs['UTF-8']) qrcode.stringToBytes = qrcode.stringToBytesFuncs['UTF-8'];
-      var q = qrcode(0, 'M'); q.addData(text); q.make();
-      var n = q.getModuleCount(), m = 3, d = '';
-      for (var r = 0; r < n; r++) for (var c = 0; c < n; c++) if (q.isDark(r, c)) d += 'M' + (c + m) + ' ' + (r + m) + 'h1v1h-1z';
-      return '<svg viewBox="0 0 ' + (n + 2 * m) + ' ' + (n + 2 * m) + '" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" role="img" aria-label="QR 코드"><rect width="100%" height="100%" style="fill:var(--qr-bg)"/><path d="' + d + '" style="fill:var(--qr-fg)"/></svg>';
-    } catch (e) { return ''; }
-  }
-  function qrFor(url, img) {
-    if (safeImg(img)) return '<img src="' + esc(img) + '" alt="QR 코드">';
-    return safeUrl(url) ? qrSvg(url) : '';
-  }
-
-  function delBtn(type, id) {
-    var key = type + ':' + id;
-    return confirmDel === key
-      ? '<button class="btn small danger" data-act="del" data-type="' + type + '" data-id="' + id + '">정말 삭제</button>'
-      : '<button class="btn small" data-act="ask-del" data-type="' + type + '" data-id="' + id + '">삭제</button>';
-  }
-
-  function card(x) {
-    var url = safeUrl(x.url), qr = qrFor(x.url, x.qrImage);
-    return '<article class="card">' +
-      '<div class="card-top"><span class="kind kind-' + (x.kind === 'app' ? 'app' : 'web') + '">' + (x.kind === 'app' ? '앱' : '웹사이트') + '</span>' +
-      (x.sample ? '<span class="sample">예시</span>' : '') + '<span class="mono yr">' + esc(x.year) + '</span></div>' +
-      '<h3>' + esc(x.title) + '</h3>' +
-      (x.desc ? '<p>' + esc(x.desc) + '</p>' : '') +
-      (x.tools ? '<p class="mono tools">' + esc(x.tools) + '</p>' : '') +
-      '<div class="card-foot">' +
-        (url ? '<a class="btn" href="' + esc(url) + '" target="_blank" rel="noopener">열어보기 ↗</a>' : '<span class="muted">주소를 아직 넣지 않았어요</span>') +
-        (qr ? '<button class="qr-thumb" data-act="zoom" data-id="' + x.id + '" aria-label="' + esc(x.title) + ' QR 크게 보기">' + qr + '</button>' : '') +
-      '</div>' +
-      (editing ? '<div class="card-edit"><button class="btn small" data-act="edit-project" data-id="' + x.id + '">수정</button>' + delBtn('project', x.id) + '</div>' : '') +
-    '</article>';
-  }
-
-  function render() {
-    var p = state.profile, s = state.site;
-    var list = state.projects.filter(function (x) { return filter === 'all' || x.kind === filter; });
-    var hours = state.trainings.reduce(function (a, t) { return a + (parseFloat(t.hours) || 0); }, 0);
-    var teachN = state.trainings.filter(function (t) { return t.kind === '강의'; }).length;
-    var siteQr = qrFor(s.url, s.qrImage);
-    var hasSample = p.sample || state.projects.some(function (x) { return x.sample; }) || state.trainings.some(function (x) { return x.sample; });
-    document.body.classList.toggle('editing', editing);
-
-    var html = '';
-    if (hasSample) html += '<div class="notice"><div class="wrap">지금은 예시로 채워 둔 내용이에요. <b>편집</b>을 눌러 선생님 정보와 작품으로 바꿔 주세요.</div></div>';
-
-    html += '<header class="board"><div class="wrap board-in"><div class="who">' +
-      '<div class="topline"><span class="mono eyebrow">' + esc([p.year, p.school].filter(Boolean).join(' · ')) + '</span>' +
-      (canEdit ? '<button class="btn chalk' + (editing ? ' on' : '') + '" data-act="toggle-edit">' + (editing ? '편집 중' : '편집') + '</button>' : '') + '</div>' +
-      '<h1>' + esc(p.name) + '</h1>' +
-      (p.role ? '<p class="role">' + esc(p.role) + '</p>' : '') +
-      (p.motto ? '<p class="prompt mono"><span class="gt">&gt;</span>' + esc(p.motto) + '<span class="caret" aria-hidden="true"></span></p>' : '') +
-      (p.intro ? '<p class="intro">' + esc(p.intro) + '</p>' : '') +
-      (p.tags && p.tags.length ? '<ul class="chalk-tags">' + p.tags.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>' : '') +
-      (editing ? '<div class="who-actions"><button class="btn chalk" data-act="edit-profile">프로필 수정</button></div>' : '') +
-      '</div>' +
-      '<aside class="qr-card" aria-label="이 페이지 QR 코드">' +
-        '<div class="qr-label mono">이 페이지 바로가기</div>' +
-        '<div class="qr-box">' + (siteQr || '<div class="qr-empty">QR 코드 자리<small>편집에서 이 사이트 주소를 넣거나<br>QR 이미지를 올려 주세요</small></div>') + '</div>' +
-        (safeUrl(s.url) ? '<div class="qr-url mono">' + esc(s.url) + '</div><button class="btn small" data-act="copy" data-text="' + esc(s.url) + '">주소 복사</button>' : '') +
-        (editing ? '<button class="btn small" data-act="edit-site">QR 설정</button>' : '') +
-      '</aside></div></header>';
-
-    html += '<main class="wrap">';
-
-    html += '<section id="works"><div class="sec-head"><h2>만든 것들</h2><span class="mono count">웹 ' +
-      state.projects.filter(function (x) { return x.kind !== 'app'; }).length + ' · 앱 ' +
-      state.projects.filter(function (x) { return x.kind === 'app'; }).length + '</span><div class="sec-tools">' +
-      [['all', '전체'], ['web', '웹사이트'], ['app', '앱']].map(function (k) {
-        return '<button class="chip-btn' + (filter === k[0] ? ' on' : '') + '" data-act="filter" data-k="' + k[0] + '" aria-pressed="' + (filter === k[0]) + '">' + k[1] + '</button>';
-      }).join('') +
-      (editing ? '<button class="btn small" data-act="add-project">+ 작품 추가</button>' : '') +
-      '</div></div><div class="grid">' + (list.map(card).join('') || '<p class="empty">이 분류에는 아직 올린 작품이 없어요.</p>') + '</div></section>';
-
-    html += '<section id="training"><div class="sec-head"><h2>연수 이력</h2><span class="mono count">총 ' + hours + '시간 · 강의 ' + teachN + '회</span>' +
-      (editing ? '<div class="sec-tools"><button class="btn small" data-act="add-training">+ 연수 추가</button></div>' : '') + '</div>' +
-      (state.trainings.length ? '<div class="table-scroll"><table><thead><tr><th>기간</th><th>연수명</th><th>기관</th><th>구분</th><th class="num">시수</th>' + (editing ? '<th></th>' : '') + '</tr></thead><tbody>' +
-        state.trainings.map(function (t) {
-          return '<tr><td class="date">' + esc(t.date) + '</td><td>' + esc(t.title) + (t.sample ? ' <span class="sample">예시</span>' : '') + '</td><td>' + esc(t.org) + '</td>' +
-            '<td><span class="tk' + (t.kind === '강의' ? ' teach' : '') + '">' + esc(t.kind) + '</span></td><td class="num">' + esc(t.hours) + '</td>' +
-            (editing ? '<td><div class="row-edit"><button class="btn small" data-act="edit-training" data-id="' + t.id + '">수정</button>' + delBtn('training', t.id) + '</div></td>' : '') + '</tr>';
-        }).join('') +
-        '</tbody><tfoot><tr><td colspan="4">합계</td><td class="num">' + hours + '</td>' + (editing ? '<td></td>' : '') + '</tr></tfoot></table></div>'
-        : '<p class="empty">아직 기록한 연수가 없어요.</p>') + '</section>';
-
-    if (p.email || safeUrl(p.blog) || editing) {
-      html += '<section id="contact"><div class="sec-head"><h2>연락하기</h2></div><div class="contact">' +
-        (p.email ? '<span class="addr">' + esc(p.email) + '</span><button class="btn small" data-act="copy" data-text="' + esc(p.email) + '">이메일 복사</button>' : '') +
-        (safeUrl(p.blog) ? '<a class="btn small" href="' + esc(p.blog) + '" target="_blank" rel="noopener">블로그·채널 ↗</a>' : '') +
-        (!p.email && !safeUrl(p.blog) ? '<span class="muted">프로필 수정에서 이메일이나 블로그 주소를 넣으면 여기에 보여요.</span>' : '') +
-        '</div></section>';
-    }
-    html += '</main><footer><div class="wrap">' + esc(p.name) + ' · 바이브코딩으로 만든 작품 모음</div></footer>';
-
-    if (editing) {
-      html += '<div class="editbar"><div class="editbar-in"><span class="msg">' +
-        (dirty ? '저장하지 않은 변경 ' + dirty + '건' : '편집 중이에요. 바꾼 내용은 저장해야 다른 사람에게 보여요.') + '</span>' +
-        '<button class="btn" data-act="toggle-edit">' + (dirty ? '저장 안 하고 닫기' : '편집 끝내기') + '</button>' +
-        '<button class="btn primary" data-act="save"' + (!dirty || saving ? ' disabled' : '') + '>' + (saving ? '저장 중…' : '저장하기') + '</button></div></div>';
-    }
-    root.innerHTML = html;
-  }
-
-  var toastTimer;
-  function toast(msg) {
-    var t = $('.toast'); if (!t) { t = document.createElement('div'); t.className = 'toast'; t.setAttribute('role', 'status'); document.body.appendChild(t); }
-    t.textContent = msg; t.hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.hidden = true; }, 2600);
-  }
-
-  function copy(text) {
-    var done = function () { toast('복사했어요'); };
-    try { navigator.clipboard.writeText(text).then(done, function () { toast('복사가 막혀 있어요. 주소를 길게 눌러 복사해 주세요'); }); }
-    catch (e) { toast('복사가 막혀 있어요. 주소를 길게 눌러 복사해 주세요'); }
-  }
-
-  function shrink(file) {
-    return new Promise(function (resolve, reject) {
-      var url = URL.createObjectURL(file), img = new Image();
-      img.onload = function () {
-        var max = 480, sc = Math.min(1, max / Math.max(img.width, img.height));
-        var cv = document.createElement('canvas'); cv.width = Math.round(img.width * sc) || 1; cv.height = Math.round(img.height * sc) || 1;
-        var cx = cv.getContext('2d'); cx.fillStyle = '#fff'; cx.fillRect(0, 0, cv.width, cv.height); cx.drawImage(img, 0, 0, cv.width, cv.height);
-        URL.revokeObjectURL(url); resolve(cv.toDataURL('image/png'));
-      };
-      img.onerror = function () { URL.revokeObjectURL(url); reject(); };
-      img.src = url;
-    });
-  }
-
-  function fieldHtml(f, v) {
-    var val = v[f.name] == null ? '' : v[f.name];
-    var id = 'f-' + f.name;
-    var inner;
-    if (f.type === 'textarea') inner = '<textarea id="' + id + '" name="' + f.name + '">' + esc(val) + '</textarea>';
-    else if (f.type === 'select') inner = '<select id="' + id + '" name="' + f.name + '">' + f.options.map(function (o) { return '<option value="' + esc(o[0]) + '"' + (o[0] === val ? ' selected' : '') + '>' + esc(o[1]) + '</option>'; }).join('') + '</select>';
-    else if (f.type === 'image') inner = '<div class="img-row"><div class="img-prev" data-prev="' + f.name + '">' + (safeImg(val) ? '<img src="' + esc(val) + '" alt="">' : '<span class="muted">없음</span>') + '</div>' +
-      '<input id="' + id + '" type="file" accept="image/*" data-img="' + f.name + '"><button type="button" class="btn small" data-clear="' + f.name + '">이미지 빼기</button></div>';
-    else inner = '<input id="' + id + '" name="' + f.name + '" type="' + (f.type || 'text') + '" value="' + esc(val) + '"' + (f.required ? ' required' : '') + (f.placeholder ? ' placeholder="' + esc(f.placeholder) + '"' : '') + (f.type === 'number' ? ' min="0" step="0.5"' : '') + '>';
-    return '<div class="field"><label for="' + id + '">' + esc(f.label) + '</label>' + inner + (f.hint ? '<span class="hint">' + esc(f.hint) + '</span>' : '') + '</div>';
-  }
-
-  function openForm(title, fields, values, onSave) {
-    var imgs = {};
-    sheet.innerHTML = '<form class="sheet-form"><h3>' + esc(title) + '</h3>' + fields.map(function (f) { return fieldHtml(f, values); }).join('') +
-      '<div class="form-actions"><button type="button" class="btn" data-close>취소</button><button type="submit" class="btn primary">적용</button></div></form>';
-    var form = sheet.querySelector('form');
-    form.querySelectorAll('[data-img]').forEach(function (inp) {
-      inp.addEventListener('change', function () {
-        var file = inp.files[0]; if (!file) return;
-        shrink(file).then(function (d) {
-          imgs[inp.dataset.img] = d;
-          form.querySelector('[data-prev="' + inp.dataset.img + '"]').innerHTML = '<img src="' + d + '" alt="">';
-        }, function () { toast('이미지를 읽지 못했어요. PNG나 JPG 파일로 다시 골라 주세요'); });
-      });
-    });
-    form.querySelectorAll('[data-clear]').forEach(function (b) {
-      b.addEventListener('click', function () { imgs[b.dataset.clear] = ''; form.querySelector('[data-prev="' + b.dataset.clear + '"]').innerHTML = '<span class="muted">없음</span>'; });
-    });
-    form.querySelector('[data-close]').addEventListener('click', function () { sheet.close(); });
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var out = {};
-      fields.forEach(function (f) {
-        if (f.type === 'image') out[f.name] = (f.name in imgs) ? imgs[f.name] : (values[f.name] || '');
-        else out[f.name] = String(form.elements[f.name].value || '').trim();
-      });
-      onSave(out); sheet.close(); dirty++; render();
-    });
-    sheet.showModal();
-  }
-
-  var F = {
-    profile: [
-      { name: 'name', label: '이름', required: true, placeholder: '예: 홍길동 선생님' },
-      { name: 'role', label: '한 줄 소개', placeholder: '예: 중학교 정보교사 · 바이브코딩 연수 강사' },
-      { name: 'school', label: '학교', placeholder: '예: ○○중학교' },
-      { name: 'year', label: '학년도', placeholder: '2026학년도' },
-      { name: 'motto', label: '칠판에 쓸 문장', hint: '이름 아래 노란 글씨로 보여요' },
-      { name: 'intro', label: '자기소개', type: 'textarea' },
-      { name: 'tags', label: '관심 분야', hint: '쉼표로 나눠 적어 주세요. 예: 바이브코딩, 에듀테크' },
-      { name: 'email', label: '이메일', type: 'email' },
-      { name: 'blog', label: '블로그·유튜브 주소', type: 'url', placeholder: 'https://' }
-    ],
-    site: [
-      { name: 'url', label: '이 사이트 주소', type: 'url', placeholder: 'https://', hint: '공유 링크를 넣으면 QR 코드가 자동으로 만들어져요' },
-      { name: 'qrImage', label: '또는 QR 이미지 올리기', type: 'image', hint: '이미지를 올리면 자동 QR 대신 이 이미지를 보여 줘요' }
-    ],
-    project: [
-      { name: 'kind', label: '종류', type: 'select', options: [['web', '웹사이트'], ['app', '앱']] },
-      { name: 'title', label: '작품 이름', required: true },
-      { name: 'desc', label: '설명', type: 'textarea', hint: '누구를 위해, 무엇을 하는 작품인지 적어 주세요' },
-      { name: 'url', label: '주소', type: 'url', placeholder: 'https://', hint: '주소를 넣으면 QR 코드가 자동으로 생겨요' },
-      { name: 'tools', label: '사용한 도구', placeholder: '예: Claude · HTML · Firebase' },
-      { name: 'year', label: '만든 해', placeholder: '2026' },
-      { name: 'qrImage', label: 'QR 이미지 (선택)', type: 'image', hint: '앱스토어 QR 등 따로 가진 QR이 있으면 올려 주세요' }
-    ],
-    training: [
-      { name: 'date', label: '기간', placeholder: '2026.07', required: true },
-      { name: 'title', label: '연수명', required: true },
-      { name: 'org', label: '기관' },
-      { name: 'kind', label: '구분', type: 'select', options: [['수강', '수강'], ['강의', '강의']] },
-      { name: 'hours', label: '시수', type: 'number' }
-    ]
-  };
-
-  function find(arr, id) { for (var i = 0; i < arr.length; i++) if (arr[i].id === id) return arr[i]; return null; }
-
-  function buildDoc() {
-    var json = JSON.stringify(state).replace(/</g, '\\u003c');
-    var keep = function (sel) { var el = document.querySelector(sel); return el ? el.outerHTML : ''; };
-    return '<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>' + RESET + '</style></head><body>' +
-      [keep('title'), keep('meta[name="claude:viewport-fit-sides"]'), keep('link[rel="preconnect"]'), keep('link[rel="stylesheet"]'), keep('#main-style'),
-       '<div id="root"></div>', '<dialog id="sheet"></dialog>',
-       '<script id="state" type="application/json">' + json + '<\/script>', keep('#qr-lib'), keep('#app')].join('\n') +
-      '</body></html>';
-  }
-
-  function save() {
-    if (!art || saving) return;
-    saving = true; render();
-    art.publish(buildDoc()).then(function () { dirty = 0; saving = false; toast('저장했어요'); render(); }, function (e) {
-      saving = false; render();
-      var c = e && e.code;
-      if (c === 'conflict') toast('다른 곳에서 먼저 저장된 내용으로 새로 불러와요');
-      else if (c === 'not_granted' || c === 'not_writer') toast('이 페이지를 저장할 권한이 없어요');
-      else toast('저장하지 못했어요. 잠시 뒤 저장하기를 다시 눌러 주세요');
-    });
-  }
-
-  root.addEventListener('click', function (e) {
-    var b = e.target.closest('[data-act]'); if (!b) return;
-    var act = b.dataset.act, id = b.dataset.id;
-    if (act !== 'del') confirmDel = null;
-    if (act === 'filter') { filter = b.dataset.k; render(); }
-    else if (act === 'copy') copy(b.dataset.text);
-    else if (act === 'toggle-edit') {
-      if (editing && dirty) { state = JSON.parse($('#state').textContent); dirty = 0; }
-      editing = !editing; render();
-    }
-    else if (act === 'save') save();
-    else if (act === 'edit-profile') {
-      var p = state.profile, v = Object.assign({}, p, { tags: (p.tags || []).join(', ') });
-      openForm('프로필 수정', F.profile, v, function (o) {
-        o.tags = o.tags.split(',').map(function (t) { return t.trim(); }).filter(Boolean);
-        o.sample = false; state.profile = o;
-      });
-    }
-    else if (act === 'edit-site') openForm('이 페이지 QR 설정', F.site, state.site, function (o) { state.site = o; });
-    else if (act === 'add-project') openForm('작품 추가', F.project, { kind: 'web', year: String(new Date().getFullYear()) }, function (o) { o.id = uid(); o.sample = false; state.projects.unshift(o); });
-    else if (act === 'edit-project') { var x = find(state.projects, id); if (x) openForm('작품 수정', F.project, x, function (o) { Object.assign(x, o, { sample: false }); }); }
-    else if (act === 'add-training') openForm('연수 추가', F.training, { kind: '수강' }, function (o) { o.id = uid(); o.sample = false; state.trainings.unshift(o); });
-    else if (act === 'edit-training') { var t = find(state.trainings, id); if (t) openForm('연수 수정', F.training, t, function (o) { Object.assign(t, o, { sample: false }); }); }
-    else if (act === 'ask-del') { confirmDel = b.dataset.type + ':' + id; render(); }
-    else if (act === 'del') {
-      var key = b.dataset.type === 'project' ? 'projects' : 'trainings';
-      state[key] = state[key].filter(function (r) { return r.id !== id; });
-      confirmDel = null; dirty++; render();
-    }
-    else if (act === 'zoom') {
-      var z = find(state.projects, id); if (!z) return;
-      sheet.innerHTML = '<div class="zoom"><h3 style="font-family:var(--display);font-weight:400;font-size:24px">' + esc(z.title) + '</h3><div class="qr-big">' + qrFor(z.url, z.qrImage) + '</div>' +
-        (safeUrl(z.url) ? '<div class="u">' + esc(z.url) + '</div>' : '') + '<button class="btn" data-close>닫기</button></div>';
-      sheet.querySelector('[data-close]').addEventListener('click', function () { sheet.close(); });
-      sheet.showModal();
-    }
-  });
-  sheet.addEventListener('click', function (e) { if (e.target === sheet) sheet.close(); });
-
-  render();
-  if (!window.qrcode) { var lib = $('#qr-lib'); if (lib) lib.addEventListener('load', render); }
-
-  (async function () {
-    try {
-      if (!window.claude || !window.claude.use) return;
-      var res = await Promise.all([window.claude.use('artifact'), window.claude.use('user')]);
-      var a = res[0], u = res[1];
-      if (!a || !u) return;
-      var ok = await (u.canEdit ? u.canEdit() : u.isOwner());
-      if (ok) { art = a; canEdit = true; render(); }
-    } catch (e) {}
-  })();
-})();
-</script>
-
-</body></html>
+  <!-- QR 코드를 만들어 주는 라이브러리 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

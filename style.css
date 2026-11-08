@@ -1,0 +1,204 @@
+/* =========================================================
+   디자인 설정
+   아래 값만 바꿔도 사이트 전체 색과 글꼴이 바뀝니다.
+   색은 #과 6자리 코드로 적어요. (색 고르기: 검색창에 "color picker")
+   ========================================================= */
+:root {
+  /* --- 밝은 화면 --- */
+  --paper: #f5f6f1;        /* 페이지 바탕색 */
+  --card: #ffffff;         /* 작품 카드 바탕색 */
+  --ink: #17231f;          /* 기본 글자색 */
+  --muted: #56665f;        /* 흐린 글자색 (설명, 날짜) */
+  --line: #d6dcd3;         /* 구분선 */
+
+  --board: #22392f;        /* 칠판 색 */
+  --board-ink: #f1efe4;    /* 칠판 위 글자 (분필) */
+  --board-muted: #b9c4bb;  /* 칠판 위 흐린 글자 */
+  --tray: #8a6a45;         /* 칠판 아래 분필받이 (나무색) */
+
+  --accent: #e2b43c;       /* 강조색 (노란 분필) */
+  --accent-ink: #7f600c;   /* 밝은 바탕 위 강조 글자 */
+  --web: #2f6f8f;          /* '웹사이트' 표시 색 */
+  --app: #8c4a6b;          /* '앱' 표시 색 */
+
+  /* --- 글꼴 --- */
+  --display: "Do Hyeon", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;          /* 큰 제목 */
+  --body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif; /* 본문 */
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;                             /* 코드 느낌 글자 */
+
+  /* --- 크기 --- */
+  --page-width: 1080px;    /* 내용이 펼쳐지는 최대 너비 */
+  --name-size: clamp(44px, 7vw, 76px); /* 이름 글자 크기 */
+
+  /* QR은 어두운 화면에서도 잘 읽히도록 흰 바탕·검은 점으로 고정 */
+  --qr-bg: #ffffff;
+  --qr-fg: #111111;
+}
+
+/* --- 어두운 화면 (휴대폰·컴퓨터가 다크 모드일 때) --- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #111916; --card: #18221e; --ink: #e6ebe5; --muted: #98a79f; --line: #2b3a34;
+    --board: #1b2d26; --board-ink: #eeede3; --board-muted: #a8b5ad; --tray: #6b5234;
+    --accent: #e8c158; --accent-ink: #e8c158; --web: #7fb7d3; --app: #d79cba;
+    color-scheme: dark;
+  }
+}
+
+/* =========================================================
+   여기부터는 배치와 모양입니다.
+   ========================================================= */
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.65;
+}
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+p { margin: 0; }
+button { font: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mono { font-family: var(--mono); }
+
+.wrap {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* ----- 칠판 ----- */
+.board { background: var(--board); color: var(--board-ink); border-bottom: 12px solid var(--tray); }
+.board-in {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 40px;
+  align-items: start;
+  padding-block: 44px 48px;
+}
+.eyebrow { font-size: 13px; letter-spacing: .06em; color: var(--board-muted); }
+.board h1 {
+  font-family: var(--display); font-weight: 400;
+  font-size: var(--name-size); line-height: 1.05;
+  margin-top: 18px;
+}
+.role { font-size: 18px; color: var(--board-muted); margin-top: 8px; }
+.prompt { margin-top: 22px; font-size: 16px; color: var(--accent); }
+.prompt .gt { opacity: .7; margin-right: 6px; }
+.caret {
+  display: inline-block; width: .55em; height: 1.1em;
+  background: var(--accent); vertical-align: -2px; margin-left: 4px;
+  animation: blink 1.1s steps(1) infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .caret { animation: none; } }
+.intro { margin-top: 14px; max-width: 58ch; }
+.chalk-tags { list-style: none; padding: 0; margin: 20px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.chalk-tags li { border: 1.5px dashed var(--board-muted); border-radius: 4px; padding: 2px 10px; font-size: 14px; }
+
+/* ----- 이 페이지 QR 카드 ----- */
+.qr-card {
+  background: var(--qr-bg); color: #17231f;
+  border-radius: 8px; padding: 16px; width: 220px;
+  display: grid; gap: 10px; justify-items: center;
+  transform: rotate(1.2deg);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .28);
+}
+.qr-label { font-size: 12px; letter-spacing: .08em; color: #56665f; }
+.qr-box { width: 188px; max-width: 100%; aspect-ratio: 1; }
+.qr-box svg, .qr-box img { width: 100%; height: 100%; display: block; object-fit: contain; }
+.qr-url { font-size: 11px; color: #56665f; word-break: break-all; text-align: center; }
+.qr-card .btn { background: #fff; color: #17231f; border-color: #cfd6ce; }
+
+/* ----- 버튼 ----- */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 1px solid var(--line); background: var(--card); color: var(--ink);
+  border-radius: 6px; padding: 7px 14px; font-size: 15px; line-height: 1.3;
+  cursor: pointer; text-decoration: none;
+}
+.btn:hover { border-color: var(--ink); }
+.btn.small { padding: 4px 10px; font-size: 13px; }
+
+/* ----- 섹션 제목 ----- */
+main { display: grid; gap: 64px; padding-block: 56px 72px; }
+.sec-head {
+  display: flex; align-items: baseline; flex-wrap: wrap; gap: 12px;
+  margin-bottom: 22px; padding-bottom: 12px; border-bottom: 2px solid var(--ink);
+}
+.sec-head h2 { font-family: var(--display); font-weight: 400; font-size: 34px; line-height: 1.1; }
+.count { color: var(--muted); font-size: 14px; }
+.filters { margin-left: auto; display: flex; gap: 6px; flex-wrap: wrap; }
+.chip-btn {
+  border: 1px solid var(--line); background: transparent; color: var(--muted);
+  border-radius: 999px; padding: 3px 12px; font-size: 14px; cursor: pointer;
+}
+.chip-btn.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+/* ----- 작품 카드 ----- */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 18px; }
+.card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 8px;
+  overflow: hidden; display: flex; flex-direction: column; min-width: 0;
+}
+.shot { aspect-ratio: 16 / 10; width: 100%; object-fit: cover; display: block; border-bottom: 1px solid var(--line); background: var(--paper); }
+.card-body { padding: 20px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.card-top { display: flex; align-items: center; gap: 8px; }
+.kind { font-size: 12px; font-weight: 700; padding: 1px 8px; border-radius: 4px; border: 1.5px solid currentColor; }
+.kind.web { color: var(--web); }
+.kind.app { color: var(--app); }
+.yr { margin-left: auto; font-size: 13px; color: var(--muted); }
+.card h3 { font-size: 20px; line-height: 1.35; }
+.card p { color: var(--muted); font-size: 15px; }
+.tools { font-size: 12.5px; }
+.card-foot { margin-top: auto; padding-top: 8px; display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; }
+.qr-thumb {
+  width: 76px; height: 76px; padding: 4px; flex: none;
+  background: var(--qr-bg); border: 1px solid var(--line); border-radius: 6px; cursor: zoom-in;
+}
+.qr-thumb svg, .qr-thumb img { width: 100%; height: 100%; display: block; object-fit: contain; }
+.empty, .muted { color: var(--muted); }
+
+/* ----- 연수 표 ----- */
+.table-scroll { overflow-x: auto; }
+table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 15px; }
+th { text-align: left; font-weight: 500; color: var(--muted); font-size: 13px; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+td { padding: 12px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.num { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+td.date { font-family: var(--mono); color: var(--muted); white-space: nowrap; }
+tfoot td { border-bottom: none; font-weight: 700; }
+.tk { font-size: 12px; padding: 1px 8px; border-radius: 999px; border: 1px solid var(--line); white-space: nowrap; }
+.tk.teach { background: var(--accent); color: #2a2205; border-color: var(--accent); }
+
+/* ----- 연락하기, 바닥글 ----- */
+.contact { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; }
+.addr { font-family: var(--mono); user-select: all; }
+footer { color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); padding-block: 24px 40px; }
+
+/* ----- QR 크게 보기, 알림 ----- */
+dialog { border: 1px solid var(--line); border-radius: 10px; padding: 24px; width: min(400px, calc(100% - 32px)); background: var(--card); color: var(--ink); }
+dialog::backdrop { background: rgba(10, 20, 16, .55); }
+.zoom { display: grid; gap: 12px; justify-items: center; text-align: center; }
+.zoom h3 { font-family: var(--display); font-weight: 400; font-size: 24px; }
+.qr-big { width: min(300px, 100%); aspect-ratio: 1; background: var(--qr-bg); padding: 8px; border-radius: 6px; }
+.qr-big svg, .qr-big img { width: 100%; height: 100%; display: block; object-fit: contain; }
+.zoom .u { font-family: var(--mono); font-size: 12px; color: var(--muted); word-break: break-all; }
+.toast {
+  position: fixed; left: 50%; transform: translateX(-50%);
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  background: var(--ink); color: var(--paper); padding: 10px 16px; border-radius: 6px; font-size: 14px;
+}
+
+/* ----- 휴대폰 화면 ----- */
+@media (max-width: 760px) {
+  .board-in { grid-template-columns: minmax(0, 1fr); gap: 32px; padding-block: 32px 36px; }
+  .qr-card { justify-self: start; transform: none; }
+  .filters { margin-left: 0; width: 100%; }
+  main { gap: 48px; padding-block: 40px 56px; }
+}
